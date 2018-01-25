@@ -42,7 +42,8 @@ defmodule Chat.Mixfile do
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       {:distillery, "~> 1.4.0", runtime: false},
-      {:comeonin, "~> 2.5"}
+      {:comeonin, "~> 2.5"},
+      {:guardian, "~> 0.14.0"}
     ]
   end
 

@@ -56,3 +56,6 @@ config :chat, Chat.Repo,
   database: "chat_dev",
   hostname: "localhost",
   pool_size: 10
+
+config :guardian, Guardian,
+  secret_key: "yGEcR+sBstBQOegioKPf2tHsPNvFdRAuvAw6u3jRv5cWKYM29tZ2Wi8HtWbn+0lR"
