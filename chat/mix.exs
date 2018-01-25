@@ -20,7 +20,7 @@ defmodule Chat.Mixfile do
   def application do
     [
       mod: {Chat.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :comeonin]
     ]
   end
 
@@ -41,7 +41,8 @@ defmodule Chat.Mixfile do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
-      {:distillery, "~> 1.4.0", runtime: false}
+      {:distillery, "~> 1.4.0", runtime: false},
+      {:comeonin, "~> 2.5"}
     ]
   end
 
