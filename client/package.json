@@ -1,6 +1,6 @@
 {
-  "name": "sling",
-  "version": "0.1.0",
+  "name": "smolltolk",
+  "version": "0.0.1",
   "private": true,
   "devDependencies": {
     "babel-eslint": "^7.0.0",
