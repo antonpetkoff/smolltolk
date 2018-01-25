@@ -11,6 +11,8 @@ defmodule ChatWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug Guardian.Plug.VerifyHeader, realm: "Bearer"
+    plug Guardian.Plug.LoadResource
   end
 
   scope "/", ChatWeb do
@@ -23,6 +25,10 @@ defmodule ChatWeb.Router do
   scope "/api", ChatWeb do
     pipe_through :api
 
-    resources "/users", UserController, except: [:new, :edit]
+    post "/sessions", SessionController, :create
+    delete "/sessions", SessionController, :delete
+    post "/sessions/refresh", SessionController, :refresh
+    resources "/users", UserController, only: [:create]
+    # resources "/users", UserController, except: [:new, :edit]
   end
 end

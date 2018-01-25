@@ -12,11 +12,18 @@ defmodule ChatWeb.UserController do
   end
 
   def create(conn, %{"user" => user_params}) do
-    with {:ok, %User{} = user} <- Accounts.create_user(user_params) do
-      conn
-      |> put_status(:created)
-      |> put_resp_header("location", user_path(conn, :show, user))
-      |> render("show.json", user: user)
+    case Accounts.register_user(user_params) do
+      {:ok, %User{} = user} ->
+        new_conn = Guardian.Plug.api_sign_in(conn, user, :access)
+        jwt = Guardian.Plug.current_token(new_conn)
+
+        new_conn
+        |> put_status(:created)
+        |> render(Sling.SessionView, "show.json", user: user, jwt: jwt)
+      {:error, changeset} ->
+        conn
+        |> put_status(:unprocessable_entity)
+        |> render(Sling.ChangesetView, "error.json", changeset: changeset)
     end
   end
 
