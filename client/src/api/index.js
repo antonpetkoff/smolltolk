@@ -1,5 +1,4 @@
-// TODO: fix .env
-const API = process.env.CHAT_API_URL || 'http://127.0.0.1:4000/api';
+const API = process.env.REACT_APP_API_URL;
 
 function headers() {
   const token = JSON.parse(localStorage.getItem('token'));
@@ -22,7 +21,7 @@ function parseResponse(response) {
 
 function queryString(params) {
   const query = Object.keys(params)
-                      .map(k => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`)
+                      .map((k) => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`)
                       .join('&');
   return `${query.length ? '?' : ''}${query}`;
 }

@@ -22,7 +22,7 @@ type Props = {
 class LoginForm extends Component {
   props: Props
 
-  handleSubmit = data => this.props.onSubmit(data);
+  handleSubmit = (data) => this.props.onSubmit(data);
 
   render() {
     const { handleSubmit, submitting } = this.props;
@@ -32,9 +32,9 @@ class LoginForm extends Component {
         className={`card ${css(styles.card)}`}
         onSubmit={handleSubmit(this.handleSubmit)}
       >
-        <h3 style={{ marginBottom: '2rem', textAlign: 'center' }}>Login to Sling</h3>
-        <Field name="email" type="text" component={Input} placeholder="Email" />
-        <Field name="password" type="password" component={Input} placeholder="Password" />
+        <h3 style={{ marginBottom: '2rem', textAlign: 'center' }}>Login to Smolltolk</h3>
+        <Field name="email" type="text" component={Input} placeholder="Email" style={{ marginBottom: '1rem' }} />
+        <Field name="password" type="password" component={Input} placeholder="Password" style={{ marginBottom: '1rem' }} />
         <button
           type="submit"
           disabled={submitting}
