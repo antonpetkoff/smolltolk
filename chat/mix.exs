@@ -43,7 +43,8 @@ defmodule Chat.Mixfile do
       {:cowboy, "~> 1.0"},
       {:distillery, "~> 1.4.0", runtime: false},
       {:comeonin, "~> 2.5"},
-      {:guardian, "~> 0.14.0"}
+      {:guardian, "~> 0.14.0"},
+      {:cors_plug, "~> 1.2"}
     ]
   end
 

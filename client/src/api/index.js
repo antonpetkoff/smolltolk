@@ -1,4 +1,5 @@
-const API = process.env.CHAT_API_URL;
+// TODO: fix .env
+const API = process.env.CHAT_API_URL || 'http://127.0.0.1:4000/api';
 
 function headers() {
   const token = JSON.parse(localStorage.getItem('token'));

@@ -38,6 +38,7 @@ defmodule ChatWeb.Endpoint do
     key: "_chat_key",
     signing_salt: "UAX1jmnh"
 
+  plug CORSPlug
   plug ChatWeb.Router
 
   @doc """
