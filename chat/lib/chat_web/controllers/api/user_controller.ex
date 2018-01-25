@@ -11,7 +11,7 @@ defmodule ChatWeb.UserController do
     render(conn, "index.json", users: users)
   end
 
-  def create(conn, %{"user" => user_params}) do
+  def create(conn, user_params) do
     case Accounts.register_user(user_params) do
       {:ok, %User{} = user} ->
         new_conn = Guardian.Plug.api_sign_in(conn, user, :access)
@@ -19,11 +19,11 @@ defmodule ChatWeb.UserController do
 
         new_conn
         |> put_status(:created)
-        |> render(Sling.SessionView, "show.json", user: user, jwt: jwt)
+        |> render(ChatWeb.SessionView, "show.json", user: user, jwt: jwt)
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)
-        |> render(Sling.ChangesetView, "error.json", changeset: changeset)
+        |> render(ChatWeb.ChangesetView, "error.json", changeset: changeset)
     end
   end
 
