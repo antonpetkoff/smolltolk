@@ -1,12 +1,3 @@
-## About
-
-Sling is a Slack clone built with Phoenix and React. Check out the blog post on medium.
-
-https://medium.com/@benhansen/lets-build-a-slack-clone-with-elixir-phoenix-and-react-part-1-project-setup-3252ae780a1
-
-## Getting started
-
-To run the project locally:
 
 #### Running the Phoenix app
 
