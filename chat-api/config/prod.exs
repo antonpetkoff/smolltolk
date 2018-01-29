@@ -13,10 +13,10 @@ use Mix.Config
 # which you typically run after static files are built.
 config :chat, Chat.Endpoint,
   http: [port: {:system, "PORT"}],
-  #url: [scheme: "https", host: "nameless-reaches-32969.herokuapp.com", port: 443],
+  #url: [scheme: "https", host: "serivce.example.com", port: 443],
   #cache_static_manifest: "priv/static/manifest.json",
   secret_key_base: System.get_env("SECRET_KEY_BASE") || "Gas2iVYFbejVRLsCEG662EUqINOge/UrCdg/YDyIAhnvaVfYliJ/iCckbM2MayE0",
-  #check_origin: ["http://sling-chat.s3-website-us-west-2.amazonaws.com"]
+  #check_origin: ["http://example.com"]
   server: true
 
 # Do not print debug messages in production
