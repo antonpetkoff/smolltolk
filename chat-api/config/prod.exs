@@ -13,10 +13,11 @@ use Mix.Config
 # which you typically run after static files are built.
 config :chat, Chat.Endpoint,
   http: [port: {:system, "PORT"}],
-  url: [scheme: "https", host: "nameless-reaches-32969.herokuapp.com", port: 443],
-  cache_static_manifest: "priv/static/manifest.json",
-  secret_key_base: System.get_env("SECRET_KEY_BASE"),
-  check_origin: ["http://sling-chat.s3-website-us-west-2.amazonaws.com"]
+  #url: [scheme: "https", host: "serivce.example.com", port: 443],
+  #cache_static_manifest: "priv/static/manifest.json",
+  secret_key_base: System.get_env("SECRET_KEY_BASE") || "Gas2iVYFbejVRLsCEG662EUqINOge/UrCdg/YDyIAhnvaVfYliJ/iCckbM2MayE0",
+  #check_origin: ["http://example.com"]
+  server: true
 
 # Do not print debug messages in production
 config :logger, level: :info
@@ -59,8 +60,16 @@ config :logger, level: :info
 #
 
 config :guardian, Guardian,
-  secret_key: System.get_env("GUARDIAN_SECRET_KEY")
+  secret_key: System.get_env("GUARDIAN_SECRET_KEY") || "ebV17yY0xt/7jFu+uUJeg7LPi3yFpRE8fwyeByJ3eSlKA6Qq5Ft+mxPiPXkKK/FU"
 
-# Finally import the config/prod.secret.exs
-# which should be versioned separately.
-import_config "prod.secret.exs"
+config :chat, ChatWeb.Endpoint,
+  secret_key_base: "X95Qnfjv5qpkIaR3OHRmll9XxJagr2qhF18uvWL3EX/ILOouLdl6pT/i2K2KAxuW"
+
+# Configure your database
+config :chat, Chat.Repo,
+  adapter: Ecto.Adapters.MySQL,
+  username: System.get_env("DB_USER") || "root",
+  password: System.get_env("DB_PASS") || "root",
+  database: System.get_env("DB_NAME") || "smolltolk_chat_prod",
+  hostname: System.get_env("DB_HOST") || "db",
+  pool_size: 15
