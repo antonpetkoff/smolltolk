@@ -3,7 +3,7 @@ defmodule Chat.Mixfile do
 
   def project do
     [app: :chat,
-     version: "0.0.1",
+     version: "0.0.2",
      elixir: "~> 1.2",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
@@ -19,7 +19,7 @@ defmodule Chat.Mixfile do
   def application do
     [mod: {Chat, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :mariaex, :comeonin, :scrivener_ecto, :corsica]]
+                    :phoenix_ecto, :mariaex, :comeonin, :scrivener_ecto, :corsica, :guardian]]
   end
 
   # Specifies which paths to compile per environment.

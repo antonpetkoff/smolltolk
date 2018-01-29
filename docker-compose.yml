@@ -3,13 +3,13 @@ services:
     db:
         image: mysql
         environment:
-            - MYSQL_DATABASE=chat_prod
+            - MYSQL_DATABASE=smolltolk_chat_prod
             - MYSQL_ROOT_PASSWORD=root
     chat:
-        image: smolltolk/chat:0.0.1
+        image: local/chat:0.0.2
         environment:
             - PORT=4000
-            - DATABASE_URL=ecto://root:root@db/chat_prod
+            - DATABASE_URL=ecto://root:root@db/smolltolk_chat_prod
         ports:
             - "4000:4000"
         depends_on:
