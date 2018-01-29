@@ -5,25 +5,31 @@ services:
     environment:
       - MYSQL_DATABASE=smolltolk_chat_prod
       - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - ./chat-data:/var/lib/mysql
 
   chat:
-    image: smolltolk/chat:0.0.2
+    image: smolltolk/chat
     environment:
       - PORT=4000
       - DATABASE_URL=ecto://root:root@db/smolltolk_chat_prod
     ports:
-      - "4000:4000"
+      - 4000:4000
     depends_on:
       - db
     links:
       - db
 
   client:
-    image: smolltolk/client:0.0.1
+    image: smolltolk/client
     ports:
-      - 8080:80
+      - 9000:80
+    links:
+      - chat
+      - cloudsync
     depends_on:
       - chat
+      - cloudsync
 
   redis:
     image: redis:alpine
@@ -31,19 +37,19 @@ services:
     ports:
       - 6379:6379
     volumes:
-      - ./testdb:/data
+      - ./redis-data:/data
 
   cloudsync:
-    image: local/cloudsync:latest
+    image: miroslavlalev/cloudsync
     volumes:
       - ./repo:/repo
     ports:
-      - 80:8081
+      - 80:8080
     links:
       - redis
     depends_on:
       - redis
     environment:
-      - PORT=8081
+      - PORT=8080
       - REPO=/repo
       - REDIS_URL=redis:6379
