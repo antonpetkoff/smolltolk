@@ -48,6 +48,13 @@ class MessageForm extends Component {
           </Dropzone>
         </div>
         <div className="input-group">
+          <div className="input-group-btn">
+              <Dropzone onDrop={this.onDrop.bind(this)} style={{}}>
+                <button className={`btn ${css(styles.button)}`}>
+                  <span className="fa fa-plus" />
+                </button>
+              </Dropzone>
+          </div>
           <Field
             name="text"
             type="text"
