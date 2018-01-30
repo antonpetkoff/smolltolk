@@ -42,11 +42,6 @@ class MessageForm extends Component {
     const { handleSubmit, submitting } = this.props;
     return (
       <form onSubmit={handleSubmit(this.handleSubmit)} className={css(styles.form)}>
-        <div>
-          <Dropzone onDrop={this.onDrop.bind(this)}>
-            <p>Click here or drop a file</p>
-          </Dropzone>
-        </div>
         <div className="input-group">
           <div className="input-group-btn">
               <Dropzone onDrop={this.onDrop.bind(this)} style={{}}>
