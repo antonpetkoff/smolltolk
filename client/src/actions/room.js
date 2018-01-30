@@ -1,6 +1,6 @@
 import { reset } from 'redux-form';
 import { Presence } from 'phoenix';
-import api from '../api';
+import { FetchHelper } from '../api/index';
 
 const syncPresentUsers = (dispatch, presences) => {
   const presentUsers = [];
@@ -8,6 +8,9 @@ const syncPresentUsers = (dispatch, presences) => {
           .map((user) => presentUsers.push(user));
   dispatch({ type: 'ROOM_PRESENCE_UPDATE', presentUsers });
 };
+
+
+const api = new FetchHelper(process.env.REACT_APP_API_URL);
 
 export function connectToChannel(socket, roomId) {
   return (dispatch) => {

@@ -1,4 +1,6 @@
-import api from '../api';
+import { FetchHelper } from '../api/index';
+
+const api = new FetchHelper(process.env.REACT_APP_API_URL);
 
 export function fetchRooms(params) {
   return (dispatch) => api.fetch('/rooms', params)

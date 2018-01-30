@@ -21,6 +21,7 @@
     "phoenix": "^1.2.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
+    "react-dropzone": "^4.2.7",
     "react-redux": "^4.4.5",
     "react-router": "4.0.0-alpha.5",
     "react-scripts": "0.7.0",

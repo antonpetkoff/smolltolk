@@ -1,67 +1,72 @@
-const API = process.env.REACT_APP_API_URL;
+export class FetchHelper {
 
-function headers() {
-  const token = JSON.parse(localStorage.getItem('token'));
-
-  return {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-    Authorization: `Bearer: ${token}`,
-  };
-}
-
-function parseResponse(response) {
-  return response.json().then((json) => {
-    if (!response.ok) {
-      return Promise.reject(json);
+    constructor(serviceUrl) {
+        this.serviceUrl = serviceUrl;
     }
-    return json;
-  });
-}
 
-function queryString(params) {
-  const query = Object.keys(params)
-                      .map((k) => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`)
-                      .join('&');
-  return `${query.length ? '?' : ''}${query}`;
-}
-
-export default {
-  fetch(url, params = {}) {
-    return fetch(`${API}${url}${queryString(params)}`, {
-      method: 'GET',
-      headers: headers(),
-    })
-    .then(parseResponse);
-  },
-
-  post(url, data) {
+    fetch(url, params = {}) {
+        return fetch(`${this.serviceUrl}${url}${this.queryString(params)}`, {
+          method: 'GET',
+          headers: this.headers(),
+        })
+        .then(this.parseResponse);
+      }
+    
+    post(url, data) {
     const body = JSON.stringify(data);
 
-    return fetch(`${API}${url}`, {
-      method: 'POST',
-      headers: headers(),
-      body,
+    return fetch(`${this.serviceUrl}${url}`, {
+        method: 'POST',
+        headers: this.headers(),
+        body,
     })
-    .then(parseResponse);
-  },
-
-  patch(url, data) {
+    .then(this.parseResponse);
+    }
+    
+    patch(url, data) {
     const body = JSON.stringify(data);
 
-    return fetch(`${API}${url}`, {
-      method: 'PATCH',
-      headers: headers(),
-      body,
+    return fetch(`${this.serviceUrl}${url}`, {
+        method: 'PATCH',
+        headers: this.headers(),
+        body,
     })
-    .then(parseResponse);
-  },
+    .then(this.parseResponse);
+    }
+    
+    delete(url) {
+    return fetch(`${this.serviceUrl}${url}`, {
+        method: 'DELETE',
+        headers: this.headers(),
+    })
+    .then(this.parseResponse);
+    }
 
-  delete(url) {
-    return fetch(`${API}${url}`, {
-      method: 'DELETE',
-      headers: headers(),
-    })
-    .then(parseResponse);
-  },
-};
+    queryString(params) {
+        const query = Object.keys(params)
+                            .map((k) => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`)
+                            .join('&');
+        return `${query.length ? '?' : ''}${query}`;
+    }
+    
+    headers() {
+        const token = JSON.parse(localStorage.getItem('token'));
+      
+        return {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer: ${token}`,
+        };
+    }
+      
+    parseResponse(response) {
+        return response.json().then((json) => {
+          if (!response.ok) {
+            return Promise.reject(json);
+          }
+          return json;
+        });
+    }
+    
+  }
+  

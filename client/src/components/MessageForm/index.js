@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react';
+import Dropzone from 'react-dropzone';
 import { Field, reduxForm } from 'redux-form';
 import { css, StyleSheet } from 'aphrodite';
 
@@ -33,11 +34,19 @@ class MessageForm extends Component {
 
   handleSubmit = (data) => this.props.onSubmit(data);
 
+  onDrop(files) {
+    console.log(files);
+  }
+
   render() {
     const { handleSubmit, submitting } = this.props;
-
     return (
       <form onSubmit={handleSubmit(this.handleSubmit)} className={css(styles.form)}>
+        <div>
+          <Dropzone onDrop={this.onDrop.bind(this)}>
+            <p>Click here or drop a file</p>
+          </Dropzone>
+        </div>
         <div className="input-group">
           <Field
             name="text"

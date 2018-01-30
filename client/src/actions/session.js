@@ -1,9 +1,10 @@
 import { reset } from 'redux-form';
 import { Socket } from 'phoenix';
-import api from '../api';
+import { FetchHelper } from '../api/index';
 import { fetchUserRooms } from './rooms';
 
 const API_URL = process.env.REACT_APP_API_URL;
+const api = new FetchHelper(API_URL);
 const WEBSOCKET_URL = API_URL.replace(/(https|http)/, 'ws').replace('/api', '');
 
 function connectToSocket(dispatch) {
