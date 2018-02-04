@@ -5,6 +5,7 @@ import MessageList from '../../components/MessageList';
 import MessageForm from '../../components/MessageForm';
 import RoomNavbar from '../../components/RoomNavbar';
 import RoomSidebar from '../../components/RoomSidebar';
+import FileSidebar from '../../components/FilesSidebar';
 import {
   connectToChannel,
   leaveChannel,
@@ -12,12 +13,17 @@ import {
   loadOlderMessages,
   updateRoom,
 } from '../../actions/room';
-import { Message, Pagination, User } from '../../types';
+import {
+  getSpace
+} from '../../actions/files'
+import { Message, Pagination, User, Space, File } from '../../types';
 
 type Props = {
   socket: any,
   channel: any,
   room: Object,
+  space: Space,
+  files: File[],
   params: {
     id: number,
   },
@@ -31,6 +37,7 @@ type Props = {
   pagination: Pagination,
   loadOlderMessages: () => void,
   updateRoom: () => void,
+  getSpace: () => void
 }
 
 class Room extends Component {
@@ -46,6 +53,10 @@ class Room extends Component {
     if (!this.props.socket && nextProps.socket) {
       this.props.connectToChannel(nextProps.socket, nextProps.params.id);
     }
+  }
+
+  componentWillMount() {
+    this.props.getSpace(this.props.currentUser.username);
   }
 
   componentWillUnmount() {
@@ -89,6 +100,7 @@ class Room extends Component {
           />
           <MessageForm onSubmit={this.handleMessageCreate} />
         </div>
+        <FileSidebar space={this.props.space.resources}/>
       </div>
     );
   }
@@ -97,6 +109,7 @@ class Room extends Component {
 export default connect(
   (state) => ({
     room: state.room.currentRoom,
+    space: state.spaceContext.space,
     socket: state.session.socket,
     channel: state.room.channel,
     messages: state.room.messages,
@@ -105,5 +118,5 @@ export default connect(
     pagination: state.room.pagination,
     loadingOlderMessages: state.room.loadingOlderMessages,
   }),
-  { connectToChannel, leaveChannel, createMessage, loadOlderMessages, updateRoom }
+  { connectToChannel, leaveChannel, createMessage, loadOlderMessages, updateRoom, getSpace }
 )(Room);

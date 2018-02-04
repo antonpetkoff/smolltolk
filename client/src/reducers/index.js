@@ -4,6 +4,7 @@ import session from './session';
 import rooms from './rooms';
 import room from './room';
 import alert from './alert';
+import { spaceContext } from './spaces-reducer';
 
 const appReducer = combineReducers({
   form,
@@ -11,6 +12,7 @@ const appReducer = combineReducers({
   rooms,
   room,
   alert,
+  spaceContext
 });
 
 export default function (state, action) {

@@ -22,3 +22,13 @@ export type Paginatinon = {
   page_size: number,
   page_number: number,
 }
+
+export type File = {
+  id: string,
+  type: string
+}
+
+export type Space = {
+  id: string,
+  resources: File[],
+}
