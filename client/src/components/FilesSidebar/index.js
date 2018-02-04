@@ -21,7 +21,7 @@ class FilesSidebar extends React.Component {
             <div className={css(styles.fileSidebar)}>
                 {files.map(function(file) {
                         return (
-                            <button>
+                            <button key={file.id}>
                                 {file.id}
                             </button>
                         )
