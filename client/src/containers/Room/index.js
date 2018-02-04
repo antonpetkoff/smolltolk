@@ -14,7 +14,8 @@ import {
   updateRoom,
 } from '../../actions/room';
 import {
-  getSpace
+  getSpace,
+  getResource
 } from '../../actions/files'
 import { Message, Pagination, User, Space, File } from '../../types';
 
@@ -100,7 +101,7 @@ class Room extends Component {
           />
           <MessageForm onSubmit={this.handleMessageCreate} />
         </div>
-        <FileSidebar files={this.props.space.resources}/>
+        <FileSidebar files={this.props.space.resources} getFileHandler={getResource}/>
       </div>
     );
   }

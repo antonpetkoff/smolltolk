@@ -47,7 +47,6 @@ export function addResource(spaceId, resourceType) {
 
 export function getResource(resourceId) {
   return (dispatch, getState) => { 
-    dispatch({type: 'FETCH_RESOURCE'});
     return api.fetch(`/resources/${resourceId}`)
     .then( response => {
       dispatch({ type: 'RECEIVE_RESOURCE', response})
