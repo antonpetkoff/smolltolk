@@ -3,16 +3,13 @@ import { FetchHelper } from '../api/index';
 const api = new FetchHelper(process.env.FILE_STORAGE_APP_API_URL);
 
 export function createSpace(username) {
-  let data = {"username": username};
-  return (dispatch) =>  {
-    return api.post(`/spaces`,data)
-    .then(response => {
-      dispatch({ type: 'CREATE_USER_SPACE_SUCCESS'});
+  return (dispatch) => api.post('/spaces', {"username": username})
+    .then( (response) => {
+       dispatch({ type: 'CREATE_USER_SPACE_SUCCESS'});
     })
-    .catch(err => {
+    .catch(() => {
       console.log('Failed to create space');
     }); 
-  };
 };
 
 export function getSpace(username) {

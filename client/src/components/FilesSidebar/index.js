@@ -24,7 +24,6 @@ class FilesSidebar extends React.Component {
 
 
     render() {
-        console.log(this.props);
         const files = this.props.files;
         const fileHandler = this.props.getFileHandler;
 

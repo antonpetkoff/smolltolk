@@ -2,6 +2,7 @@ import { reset } from 'redux-form';
 import { Socket } from 'phoenix';
 import { FetchHelper } from '../api/index';
 import { fetchUserRooms } from './rooms';
+import { createSpace } from './files';
 
 const API_URL = process.env.REACT_APP_API_URL;
 const api = new FetchHelper(API_URL);
@@ -39,6 +40,7 @@ export function signup(data, router) {
   return (dispatch) => api.post('/users', data)
     .then((response) => {
       setCurrentUser(dispatch, response);
+      createSpace(response.data.username);
       dispatch(reset('signup'));
       router.transitionTo('/');
     })
