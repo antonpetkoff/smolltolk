@@ -100,7 +100,7 @@ class Room extends Component {
           />
           <MessageForm onSubmit={this.handleMessageCreate} />
         </div>
-        <FileSidebar space={this.props.space.resources}/>
+        <FileSidebar files={this.props.space.resources}/>
       </div>
     );
   }
